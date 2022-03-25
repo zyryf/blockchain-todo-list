@@ -56,11 +56,35 @@ App = {
   },
 
   renderTasks: async () => {
-    const taskFormElement = $('#task-form')
-    
-    const taskNumber = await App.todoList.taskNumber()
-    console.log(taskNumber)
+    const taskFormElement = document.getElementById('task-list')
+    // clear element before rendering new tasks
+    taskFormElement.innerHTML = ''
+
+    const taskNumber = await App.todoList.taskNumber.call()
+  
+    for(let i=1; i<=taskNumber; i++) {
+      const task = await App.todoList.tasks(i)
+      const li = document.createElement('li')
+
+   
+
+     
+      li.innerHTML = task[1]
+      li.classList.add('list-group-item')
+      taskFormElement.appendChild(li)
+    }
+  },
+
+  addTask: async () => {
+    const taskDescription = $('#new-task').val()
+
+    // quit when string is empty
+    if(taskDescription === '') return
+
+    await App.todoList.createTask(taskDescription, {from: App.account})
+    return App.renderTasks()
   }
+  
 
 
 };

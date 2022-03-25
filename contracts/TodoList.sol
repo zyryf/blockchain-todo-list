@@ -17,6 +17,10 @@ contract TodoList {
         tasks[taskNumber] = Task(taskNumber, _content, false);
     }
 
+    function getTaskNumber() public view returns (uint256) {
+        return taskNumber;
+    }
+
     constructor() public {
         createTask("first task");
     }

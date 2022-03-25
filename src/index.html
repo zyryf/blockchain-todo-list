@@ -23,23 +23,27 @@
         margin-bottom: 10px;
       }
 
+      #task-list{
+        width: 350px;
+        margin: 0 auto;
+      }
+
     </style>
   </head>
   <body>
     <p>You are connected to: </p>
     <div id="account-id"></div>
-    <form class="mx-auto ">
-      <div class="form-group my-2">
-        <label for="exampleInputEmail1">Task name: </label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add task here ...">
+    <form class="mx-auto " onsubmit="App.addTask(); return false;">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="new-task" placeholder="Add task here ... " aria-label="Task name" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="submit">Add</button>
+        </div>
       </div>
-      
-     
-      <button type="submit" class="btn btn-primary">Add task</button>
     </form>
-    <ul id="task-list">
-      
+    <ul class="list-group" id="task-list">
     </ul>
+ 
     
     <!-- jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

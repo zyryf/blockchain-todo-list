@@ -17,6 +17,11 @@ contract TodoList {
         tasks[taskNumber] = Task(taskNumber, _content, false);
     }
 
+    function deleteTask(uint256 _id) public {
+        delete tasks[_id];
+        taskNumber--;
+    }
+
     function getTaskNumber() public view returns (uint256) {
         return taskNumber;
     }

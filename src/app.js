@@ -65,14 +65,22 @@ App = {
     for(let i=1; i<=taskNumber; i++) {
       const task = await App.todoList.tasks(i)
       const li = document.createElement('li')
-
-   
-
-     
+      const span = document.createElement('span')
+      span.classList.add('delete')
+      span.setAttribute('id', i)
+      span.innerHTML='X'
       li.innerHTML = task[1]
-      li.classList.add('list-group-item')
+      li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center')
+      li.appendChild(span)
       taskFormElement.appendChild(li)
     }
+
+    // adding event listener for item deletion
+    document.querySelectorAll('.delete').forEach(item => {
+      item.addEventListener('click', () => {
+        App.todoList.deleteTask(item.id, {from: App.account})
+      })
+    })
   },
 
   addTask: async () => {
@@ -83,10 +91,13 @@ App = {
 
     await App.todoList.createTask(taskDescription, {from: App.account})
     return App.renderTasks()
+  },
+
+  deleteTask: async (id) => {
+    await App.todoList.deleteTask(id)
+    return App.renderTasks()
   }
   
-
-
 };
 
 $(function() {

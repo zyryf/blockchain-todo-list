@@ -4,7 +4,6 @@ App = {
   contracts: {},
 
   init: async function() {
-    console.log('app loading ...')
     return App.initWeb3();
   },
 
@@ -48,8 +47,20 @@ App = {
 
     // Hydrate the smart contract with values from the blockchain
     App.todoList = await App.contracts.TodoList.deployed()
+    return App.renderAccountDetails()
   },
 
+  renderAccountDetails:  () => {
+    $('#account-id').html(App.account)
+    return App.renderTasks()
+  },
+
+  renderTasks: async () => {
+    const taskFormElement = $('#task-form')
+    
+    const taskNumber = await App.todoList.taskNumber()
+    console.log(taskNumber)
+  }
 
 
 };

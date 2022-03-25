@@ -47,10 +47,10 @@ App = {
 
     // Hydrate the smart contract with values from the blockchain
     App.todoList = await App.contracts.TodoList.deployed()
-    return App.renderAccountDetails()
+    return App.render()
   },
 
-  renderAccountDetails:  () => {
+  render: () => {
     $('#account-id').html(App.account)
     return App.renderTasks()
   },
@@ -61,7 +61,10 @@ App = {
     taskFormElement.innerHTML = ''
 
     const taskNumber = await App.todoList.taskNumber.call()
+    console.log('------')
+    console.log(taskNumber.toNumber())
   
+    // create li element for every task fetched from blockchain
     for(let i=1; i<=taskNumber; i++) {
       const task = await App.todoList.tasks(i)
       const li = document.createElement('li')
@@ -70,17 +73,15 @@ App = {
       span.setAttribute('id', i)
       span.innerHTML='X'
       li.innerHTML = task[1]
+      span.addEventListener('click', async () => {
+        await App.todoList.deleteTask(i, {from: App.account})
+        App.renderTasks()
+      })
       li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center')
       li.appendChild(span)
       taskFormElement.appendChild(li)
     }
 
-    // adding event listener for item deletion
-    document.querySelectorAll('.delete').forEach(item => {
-      item.addEventListener('click', () => {
-        App.todoList.deleteTask(item.id, {from: App.account})
-      })
-    })
   },
 
   addTask: async () => {
@@ -95,7 +96,6 @@ App = {
 
   deleteTask: async (id) => {
     await App.todoList.deleteTask(id)
-    return App.renderTasks()
   }
   
 };

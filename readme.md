@@ -6,24 +6,31 @@
   1) Run Ganache on your local machine to initialize development blockchain
   2) Setup [ MetaMask](https://trufflesuite.com/docs/truffle/getting-started/truffle-with-metamask.html) to run on your local network
   2) Install dependencies
-    `npm install -g truffle`
-    `npm install`
+    ```
+      npm install -g truffle
+    ```
+    ```
+      npm install
+    ```
 
   3) Compile contracts
-    `truffle compile`
+    ```
+    truffle compile
+    ```
 
   4) Migrate contracts to the blockchain
-    `truffle migrate`
+    ```
+    truffle migrate
+    ```
+    
 
   5) Run local server
-    `npm run dev`
+    ```
+    npm run dev
+    ```
 
 ### Debugging smart contracts
   Enter to the console
-   `truffle console`
-
-
-
-
-
-
+   ```
+    truffle console
+   ``` 

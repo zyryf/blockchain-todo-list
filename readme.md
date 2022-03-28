@@ -1,7 +1,7 @@
 ### Dependencies
 
 * [Ganache](https://trufflesuite.com/ganache/index.html) (local etherum blockchain)
-* [MetaMask](https://metamask.io/) (google chrome extension for blockchain connectivity)
+* [MetaMask](https://metamask.io/) (blockchain wallet)
 
 ### Initial Setup
 
